@@ -12,7 +12,6 @@ server.listen(3000,()=>{
     console.log('Server is running on port 3000');
 });
 
-
 const io = socketio(server,{
     cors:{
         origin: '*',
@@ -21,14 +20,30 @@ const io = socketio(server,{
 });
 
 
-let sub = web3.eth.subscribe('newBlockHeaders');
+//Blokları takip etmek için abonelik başlattık
+let blokTakip = web3.eth.subscribe('newBlockHeaders');
 
-sub.on('data',(blockHeader)=>{
+//Blokları dinliyoruz
+blokTakip.on('data',(blockHeader)=>{
     io.emit('blockHeader',blockHeader);
 });
 
 
 
 io.on('connection',(socket)=>{
+    //Soket idsini gösterioruz
     console.log('New user connected : ' + socket.id);
+
+    //son 4 bloğu kullanıcıya emit ediyoruz
+    web3.eth.getBlockNumber((req,res)=>{
+        let geriGidilecekBlokSayisi = res - 4;
+        for(let i = geriGidilecekBlokSayisi; i <= res; i++){
+            web3.eth.getBlock(i,(req,blokBilgileri)=>{
+                socket.emit('blockHeader',blokBilgileri);
+            });
+        }
+    })
+
+
+
 })
