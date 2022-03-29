@@ -4,6 +4,7 @@
 
 
     <TransitionGroup name="list">
+
         <div class="col-sm-2 mt-2 float-end" v-for="item in bloklar" :key="item.number">
 
           <div class="card">
