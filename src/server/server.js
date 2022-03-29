@@ -26,13 +26,17 @@ let blokTakip = web3.eth.subscribe('newBlockHeaders');
 //Blokları dinliyoruz
 blokTakip.on('data',(blockHeader)=>{
 
+    //bloğun bulunma saatini formatlıyoruz
     blockHeader.timestamp = moment.unix(blockHeader.timestamp).format('HH:mm:ss');
 
+    //son  blokları tüm soketlere emit ediyoruz
     io.emit('blockHeader',blockHeader);
 
-    web3.eth.getBlock(blockHeader.number).then((transfer)=>{
+    //son transferleri tüm soketlere emit ediyoruz
+    web3.eth.getBlock(blockHeader.number).then(async (transfer)=>{
         io.emit('transfer',transfer.transactions);
     });
+
 });
 
 io.on('connection',(socket)=>{
