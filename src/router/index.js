@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BlockView from '../views/BlockView.vue'
+import TranferView from '../views/TranferView.vue'
 const routes = [
 
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/block',
     name: 'block',
     component: BlockView
+  },
+  {
+    path: '/transfer',
+    name: 'transfer',
+    component: TranferView
   },
 
 

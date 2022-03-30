@@ -35,7 +35,7 @@ export default {
       hash        : '',
       parentHash  : '',
       transfer    : [],
-      limit       : 5,
+      limit       : 10,
     }
   },
   mounted() {
@@ -67,8 +67,8 @@ export default {
   transform: translateX(150px);
 }
 #over{
-  min-height: 785px;
-  max-height: 785px;
+  min-height: 1200px;
+  max-height: 1200px;
   overflow: hidden;
 }
 </style>

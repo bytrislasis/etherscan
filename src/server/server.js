@@ -2,7 +2,9 @@ const http      = require('http');
 const socketio  = require('socket.io');
 const Web3      = require('web3');
 const moment    = require('moment');
-const {last4Block,last10Transfer} = require('./socketSend');
+
+const {last4Block,last10Transfer,last24Block} = require('./socketSend');
+
 const web3      = new Web3(new Web3.providers.WebsocketProvider('ws://127.0.0.1:8556'));
 const server    = http.createServer((req,res)=>{
     res.end('Server is running');
@@ -47,5 +49,10 @@ io.on('connection',(socket)=>{
 
     //Son 10 Transfer
     last10Transfer(web3,socket);
+
+    //Son 24 blok
+    last24Block(web3,socket);
+
+
 
 })

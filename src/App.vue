@@ -15,7 +15,7 @@
               <router-link to="/block" class="nav-link">Bloklar</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/transferler">Transferler</a>
+              <router-link to="/transfer" class="nav-link">Transferler</router-link>
             </li>
           </ul>
           <form class="d-flex w-50">
