@@ -34,7 +34,7 @@ blokTakip.on('data',(blockHeader)=>{
 
     //son transferleri tüm soketlere emit ediyoruz
     web3.eth.getBlock(blockHeader.number).then(async (transfer)=>{
-        io.emit('transfer',transfer.transactions);
+        io.emit('transfer',transfer);
     });
 
 });
@@ -55,7 +55,7 @@ io.on('connection',(socket)=>{
     })
 
     web3.eth.getBlock('latest').then((transfer)=>{
-        socket.emit('transfer',transfer.transactions);
+        socket.emit('transfer',transfer);
     });
 
 })

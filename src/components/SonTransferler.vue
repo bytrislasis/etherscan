@@ -1,8 +1,7 @@
 <template>
   <!--Transferler-->
   <div class="row mt-4">
-    <div class="col">
-
+    <div class="col" id="over">
       <TransitionGroup name="list">
         <div class="card mb-3" v-for="item in transfer" :key="item">
           <div class="card-header">Transfer Bilgileri</div>
@@ -12,7 +11,9 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">TX Hash</h5>
+                <p>
+                  <span><code>{{parentHash.substring(0,35)}}</code></span> ===> <span><code style="cursor: pointer">{{hash.substring(0,35)}}</code></span>
+                </p>
                 <p class="card-text"><a :href="item" class="link-info">{{item}}</a></p>
               </div>
             </div>
@@ -21,36 +22,70 @@
       </TransitionGroup>
     </div>
   </div>
+
 </template>
 
+
+
+
+
 <script>
+
+
 import io from 'socket.io-client'
 export default {
   data(){
     return {
-      socket: {},
-      transfer: [],
-      limit: 3,
+      socket      : {},
+      hash        : '',
+      parentHash  : '',
+      transfer    : [],
+      limit       : 5,
     }
   },
   mounted() {
     this.socket = io('http://localhost:3000');
     this.socket.on('transfer', (data) => {
+
       console.log(data)
-      this.transfer = data.slice(Math.max(data.length - this.limit, 0))
+
+        this.hash = data.hash;
+
+        this.parentHash = data.parentHash;
+
+        let last10 = data.transactions.slice(Math.max(data.transactions.length - this.limit, 0));
+
+        for (let i = 0; i < last10.length; i++) {
+
+          setTimeout(()=>{
+
+            this.transfer.unshift(last10[i])
+
+          },i*750)
+
+        }
+
     })
   }
 }
+
 </script>
+
 
 <style scoped>
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 1s ease-out;
 }
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(30px);
+}
+
+#over{
+  min-height: 785px;
+  max-height: 785px;
+  overflow: hidden;
 }
 </style>
