@@ -26,12 +26,7 @@
 </template>
 
 
-
-
-
 <script>
-
-
 import io from 'socket.io-client'
 export default {
   data(){
@@ -46,29 +41,18 @@ export default {
   mounted() {
     this.socket = io('http://localhost:3000');
     this.socket.on('transfer', (data) => {
-
       console.log(data)
-
-        this.hash = data.hash;
-
-        this.parentHash = data.parentHash;
-
-        let last10 = data.transactions.slice(Math.max(data.transactions.length - this.limit, 0));
-
-        for (let i = 0; i < last10.length; i++) {
-
-          setTimeout(()=>{
-
-            this.transfer.unshift(last10[i])
-
-          },i*750)
-
-        }
-
+      this.hash = data.hash;
+      this.parentHash = data.parentHash;
+      let last10 = data.transactions.slice(Math.max(data.transactions.length - this.limit, 0));
+      for (let i = 0; i < last10.length; i++) {
+        setTimeout(()=>{
+          this.transfer.unshift(last10[i])
+        },i*750)
+      }
     })
   }
 }
-
 </script>
 
 
@@ -82,7 +66,6 @@ export default {
   opacity: 0;
   transform: translateX(30px);
 }
-
 #over{
   min-height: 785px;
   max-height: 785px;
