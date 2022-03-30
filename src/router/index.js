@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BlockView from '../views/BlockView.vue'
 import TranferView from '../views/TranferView.vue'
+import DetailView from '../views/DetailView.vue'
 const routes = [
 
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/transfer',
     name: 'transfer',
     component: TranferView
+  },
+  {
+    path: '/detail/:txid',
+    name: 'detail',
+    component: DetailView
   },
 
 

@@ -12,9 +12,11 @@
             <div class="col-md-8">
               <div class="card-body">
                 <p>
-                  <span><code>{{parentHash.substring(0,35)}}</code></span> ===> <span><code style="cursor: pointer">{{hash.substring(0,35)}}</code></span>
+                  <span><code style="cursor: pointer">{{parentHash.substring(0,35)}}</code></span> ===> <span><code style="cursor: pointer">{{hash.substring(0,35)}}</code></span>
                 </p>
-                <p class="card-text"><a :href="item" class="link-info">{{item}}</a></p>
+                <p class="card-text">
+                  <router-link  class="link-info" :to="{name:'detail',params:{txid:item}}">{{item}}</router-link>
+                </p>
               </div>
             </div>
           </div>
@@ -24,6 +26,9 @@
   </div>
 
 </template>
+
+
+
 
 
 <script>
@@ -64,7 +69,7 @@ export default {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(150px);
+  transform: translateX(30px);
 }
 #over{
   min-height: 785px;

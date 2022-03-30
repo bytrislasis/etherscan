@@ -54,5 +54,15 @@ io.on('connection',(socket)=>{
     last24Block(web3,socket);
 
 
+    socket.on('transferdetail',(data)=>{
+        let tx = data.txid;
+
+        web3.eth.getTransaction(tx).then((transfer)=>{
+            socket.emit('transferdetail',transfer);
+        });
+
+    })
+
+
 
 })
