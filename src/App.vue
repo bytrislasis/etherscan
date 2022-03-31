@@ -2,7 +2,7 @@
   <div class="container border">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SatoshiTURK.Com</a>
+        <router-link class="navbar-brand" to="/"> SatoshiTURK.Com </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,8 +19,8 @@
             </li>
           </ul>
           <form class="d-flex w-50">
-            <input class="form-control me-2 " type="search" placeholder="Address veya Txn Hash Arayın" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Ara</button>
+            <input class="form-control me-2" type="search" placeholder="Address veya Txn Hash Arayın" aria-label="Search" v-model="arama">
+            <button class="btn btn-outline-success" type="button" @click="ara">Ara</button>
           </form>
         </div>
       </div>
@@ -29,3 +29,21 @@
   </div>
 
 </template>
+
+
+<script>
+export default {
+  data () {
+    return {
+      arama:''
+    }
+  },
+  methods : {
+    ara(){
+
+      this.$router.push({name:'detail',params:{txid:this.arama}})
+
+    }
+  }
+}
+</script>

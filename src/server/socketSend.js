@@ -34,9 +34,20 @@ const last24Block = (web3,socket)=>{
 
 }
 
+const transferDetail = (web3,socket)=>{
+    socket.on('transferdetail',(data)=>{
+        let tx = data.txid;
+
+        web3.eth.getTransaction(tx).then((transfer)=>{
+            socket.emit('transferdetail',transfer);
+        });
+
+    })
+}
 
 module.exports = {
     last4Block,
     last10Transfer,
-    last24Block
+    last24Block,
+    transferDetail
 }

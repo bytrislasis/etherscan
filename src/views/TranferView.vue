@@ -14,7 +14,12 @@
                 <p>
                   <span><code>{{parentHash.substring(0,35)}}</code></span> ===> <span><code style="cursor: pointer">{{hash.substring(0,35)}}</code></span>
                 </p>
-                <p class="card-text"><a :href="item" class="link-info">{{item}}</a></p>
+                <p class="card-text">
+
+                  <router-link  class="link-info" :to="{name:'detail',params:{txid:item}}">{{item}}</router-link>
+
+
+                </p>
               </div>
             </div>
           </div>
@@ -41,7 +46,7 @@ export default {
   mounted() {
     this.socket = io('http://localhost:3000');
     this.socket.on('transfer', (data) => {
-      console.log(data)
+      //console.log(data)
       this.hash = data.hash;
       this.parentHash = data.parentHash;
       let last10 = data.transactions.slice(Math.max(data.transactions.length - this.limit, 0));

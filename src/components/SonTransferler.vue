@@ -46,7 +46,7 @@ export default {
   mounted() {
     this.socket = io('http://localhost:3000');
     this.socket.on('transfer', (data) => {
-      console.log(data)
+      //console.log(data)
       this.hash = data.hash;
       this.parentHash = data.parentHash;
       let last10 = data.transactions.slice(Math.max(data.transactions.length - this.limit, 0));
