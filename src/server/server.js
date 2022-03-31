@@ -40,6 +40,7 @@ blokTakip.on('data',(blockHeader)=>{
 });
 
 
+
 io.on('connection',(socket)=>{
     //Soket idsini gösterioruz
     console.log('New user connected : ' + socket.id);
@@ -55,9 +56,5 @@ io.on('connection',(socket)=>{
 
     //Transfer detayı
     transferDetail(web3,socket);
-
-
-
-
 
 })
