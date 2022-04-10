@@ -1,4 +1,4 @@
-# etherscan
+# Örnek Etherscan Projesi | Blockchain Eğitim Seti içerisinde anlatılmıştır.
 
 ## Project setup
 ```
